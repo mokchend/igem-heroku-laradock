@@ -1,0 +1,20 @@
+version: 2
+jobs:
+  deploy:
+    working_directory: ~/src
+    docker:
+      - image: circleci/php:7.1-browsers
+    steps:
+      - checkout
+      - run:
+          name: heroku deploy
+          command: |
+            git push -f https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git `git subtree split --prefix src`:master 
+workflows:
+  version: 2
+  deploy:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              only: master
