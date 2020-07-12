@@ -1,3 +1,37 @@
+Clone from : https://github.com/igemwaseda/igem-heroku
+
+# Demonstrate how to use laradock with laravel source used to be deployed on heroku
+## Dockerize your environment
+```
+cd laradock
+cp env-example .env
+vim .env
+APP_CODE_PATH_HOST=../src
+```
+
+## Laravel projet configuration
+* to connect to docker environmennt : phpMyAdmin http://localhost:8080/ (root/root)
+* Create the homestead database
+```
+cd src
+cp .env.example .env
+vim .env
+
+#Heroku
+CLEARDB_DATABASE_URL=mysql://root:root@mysql
+
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=homestead
+DB_USERNAME=root
+DB_PASSWORD=root
+```
+* composer update
+* php artisan migrate
+
+# Original project
+
 # IGEM ウェブサイト開発
 Outline
   - Installation
